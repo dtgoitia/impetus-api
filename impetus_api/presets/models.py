@@ -9,8 +9,8 @@ class Preset(models.Model):
     """
 
     name = models.CharField(max_length=100)
-    summary = models.CharField(max_length=300)
+    summary = models.CharField(max_length=300, blank=True, default='')
 
     def __str__(self):
         """Preset console representation."""
-        return f"<Preset '{self.name}' >"
+        return f"name='{self.name}' summary='{self.summary}' >"
