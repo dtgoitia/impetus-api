@@ -27,13 +27,12 @@ def preset_list(request):
 def preset_detail(request, pk):
     """Retrieve, update or delete a preset."""
     try:
-        preset = Preset.object.get(pk=pk)
+        preset = Preset.objects.get(pk=pk)
     except Preset.DoesNotExist:
         return HttpResponse(status=404)
 
     if request.method == 'GET':
-        presets = Preset.objects.all()
-        serializer = PresetSerializer(presets, many=True)
+        serializer = PresetSerializer(preset, many=False)
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'PUT':
