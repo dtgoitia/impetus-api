@@ -76,12 +76,12 @@ class Loop(models.Model):
     entries = fields.GenericRelation(Entry)
 
 
-def create_timer(description='Default timer description', time=5000, is_work=True, pause=False):
+def create_timer(description='Default timer description', time=5000, is_work=True, pause=False):  # noqa: ignore=D103
     timer = Timer(description=description, time=time, is_work=is_work, pause=pause)
     return timer
 
 
-def create_loop(description='Default loop description', rounds=3):
+def create_loop(description='Default loop description', rounds= 3):  # noqa: ignore=D103
     loop = Loop(description=description, rounds=rounds)
     return loop
 
