@@ -1,13 +1,13 @@
 To boot up the server from the shell:
 
-.. code-block:: BASH
+.. code-block :: BASH
 
   cd ./impetus_api
   python manage.py runserver
 
 To debug from VSCode:
 
-.. code-block::JSON
+.. code-block ::JSON
 
   {
     "version": "0.2.0",
@@ -27,3 +27,12 @@ To debug from VSCode:
       }
     ]
   }
+
+
+Setup database:
+
+.. code-block :: BASH
+
+  python manage.py migrate                 # Run migration steps
+  python manage.py makemigrations presets  # Update our migration steps
+  python manage.py migrate                 # Run migration steps once more

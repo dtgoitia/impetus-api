@@ -1,0 +1,129 @@
+swagger: '2.0'
+info:
+  description: 'Impetus API contracts.'
+  version: '0.0.1'
+  title: 'Impetus'
+host: 'petstore.swagger.io'
+basePath: '/api'
+schemes:
+- https
+- http
+paths:
+  /presets:
+    get:
+      tags:
+      - preset
+      summary: Returns all presets
+      operationId: readPresets
+      responses:
+        200:
+          description: Return all presets
+          schema:
+            $ref: '#/definitions/PresetCollection'
+        404:
+          description: Preset not found
+    post:
+      tags:
+      - preset
+      summary: Creates a new preset
+      operationId: createPreset
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Preset object that needs to be added
+        required: true
+        schema:
+          $ref: '#/definitions/CreatePreset'
+      responses:
+        201:
+          description: Preset created
+          headers:
+            Location:
+              type: string
+              description: Fully qualified URL to the created preset resource
+          schema:
+            $ref: '#/definitions/Preset'
+        405:
+          description: Invalid input supplied
+  /presets/{presetId}:
+    get:
+      tags:
+      - preset
+      summary: Returns a single preset
+      operationId: getPreset
+      produces:
+      - application/json
+      parameters:
+      - name: presetId
+        in: path
+        description: ID of the preset to be returned
+        required: true
+        type: 'integer'
+        format: 'int64'
+      responses:
+        200:
+          description: Return a single preset
+          schema:
+            $ref: '#/definitions/Preset'
+        404:
+          description: Preset not found
+    put:
+      tags:
+      - 'preset'
+      summary: Updates an existing pet
+      operationId: updatePet
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - name: presetId
+        in: path
+        description: ID of the preset to be returned
+        required: true
+        type: 'integer'
+        format: 'int64'
+      - in: 'body'
+        name: 'body'
+        description: 'Preset object that needs to be udpated'
+        required: true
+        schema:
+          $ref: '#/definitions/Preset'
+      responses:
+        200:
+          description: The preset was successfully updated
+definitions:
+  CreatePreset:
+    type: object
+    properties:
+      id:
+        type: string
+        description: "The 'id' property can be passed optionally, to enforce a given ID."
+      name:
+        type: string
+      summary:
+        type: string
+      preset: 
+        type: string
+  Preset:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      summary:
+        type: string
+      preset: 
+        type: string
+  PresetCollection:
+    type: object
+    properties:
+      data:
+        type: array
+        items:
+          $ref: '#/definitions/Preset'
