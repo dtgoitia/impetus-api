@@ -5,9 +5,8 @@ WORKDIR /impetus_api
 
 RUN pip install pipenv
 COPY Pipfile Pipfile.lock ./
-COPY . /impetus_api/
+COPY ./impetus_api /impetus_api/
 
 RUN pipenv install --system
 
-# CMD ["pipenv", "run", "python", "manage.py", "runserver"]
 CMD ["python", "manage.py", "runserver"]
