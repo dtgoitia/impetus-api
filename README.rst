@@ -47,6 +47,19 @@ Run built image (``impetus-api``) and expose it on the port ``8080``:
 
 .. code-block :: bash
 
-  $ docker run -p 8080:8000
+  $ docker run -p 8080:8000 impetus-api
 
-In your browser, navigate to ``localhost:8080`` to see the API up and running!
+Navigate in your browser to localhost:8080_ to see the AgPI up and running!
+
+.. _localhost:8080: http://localhost:8080
+
+Remember to kill the container once you finish:
+
+.. code-block :: bash
+
+  $ docker container ls
+  CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
+  fcdadb5b64ff        impetus-api         "python manage.py ru…"   16 minutes ago      Up 16 minutes       0.0.0.0:8080->8000/tcp   compassionate_goodall
+
+  $ docker container kill fcdadb5b64ff
+  fcdadb5b64ff
