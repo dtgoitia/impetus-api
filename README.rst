@@ -1,3 +1,6 @@
+Run the API
+===========
+
 To boot up the server from the shell:
 
 .. code-block :: bash
@@ -37,29 +40,47 @@ Setup database:
   $ python manage.py makemigrations presets  # Update our migration steps
   $ python manage.py migrate                 # Run migration steps once more
 
-Build Docker image:
 
-.. code-block :: bash
+Run the API with Docker
+=======================
 
-  $ docker build --tag impetus-api .
+First time instructions
+-----------------------
 
-Run built image (``impetus-api``) and expose it on the port ``8080``:
+1. Build Docker image from Dockerfile and tag the new image as ``impetus_api``:
 
-.. code-block :: bash
+    .. code-block :: bash
 
-  $ docker run -p 8080:8000 impetus-api
+      $ docker build --tag impetus-api .
 
-Navigate in your browser to localhost:8080_ to see the AgPI up and running!
+2. Create container called ``impetus-api`` from the ``impetus-api`` image, expose it on the port ``8080`` and run the container:
+
+    .. code-block :: bash
+
+      $ docker run -p 8080:8000 --name impetus-api impetus-api
+
+3. Navigate in your browser to localhost:8080_ to see the API up and running!
 
 .. _localhost:8080: http://localhost:8080
 
-Remember to kill the container once you finish:
+
+Stop your container
+-------------------
+
+Remember to stop the container once you finish. You can do it by its name ``impetus-api``:
 
 .. code-block :: bash
 
-  $ docker container ls
-  CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                    NAMES
-  fcdadb5b64ff        impetus-api         "python manage.py ru…"   16 minutes ago      Up 16 minutes       0.0.0.0:8080->8000/tcp   compassionate_goodall
+  $ docker container stop impetus-api
+  impetus-api
 
-  $ docker container kill fcdadb5b64ff
-  fcdadb5b64ff
+
+Start your container
+--------------------
+
+Once you have created (with ``docker run``) a container, is not necessary to create new containers. You can re-start your container by its name ``impetus-api``:
+
+.. code-block :: bash
+
+  $ docker container start impetus-api
+  impetus-api
